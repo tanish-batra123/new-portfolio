@@ -30,7 +30,8 @@ export const Contact = () => {
 
     setLoading(true);
     try {
-      const api = "https://vercel-backend-nine-gules.vercel.app/contact-Me";
+      const api = "https://vercel-backend-nine-gules.vercel.app/portfolio/contact-Me";
+
       await axios.post(api, {
         Name: form.Name,
         emailid: form.emailid,
