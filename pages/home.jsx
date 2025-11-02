@@ -1,19 +1,46 @@
 import { useRef } from "react";
 import { TypingEffect } from "../components/typing";
 import "../pages/home.css";
+import "../pages/loader.css";
 import { projects, skills } from "../src/assets/asset";
 import { Contact } from "./contact";
-
+import { useState } from "react";
+import { useEffect } from "react";
 
 export const Home = () => {
-  const handleResume=()=>{
+  const [loading,setloading]=useState(true);
+  const handleResume = () => {
     window.open("/resume.pdf", "_blank");
-  }
-  const projectref=useRef(null);
-  const viewProjects=()=>{
-    projectref.current.scrollIntoView({behaviour:"smooth",block:"start"})
+  };
+
+  const projectref = useRef(null);
+
+  const viewProjects = () => {
+    projectref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  useEffect(()=>{
+    const timer=setTimeout(()=>setloading(false),2500);
+    return ()=>clearTimeout(timer);
+  },[])
+  if (loading) {
+    return (
+     <div class="terminal-loader">
+  <div class="terminal-header">
+    <div class="terminal-title">Status</div>
+    <div class="terminal-controls">
+      <div class="control close"></div>
+      <div class="control minimize"></div>
+      <div class="control maximize"></div>
+    </div>
+  </div>
+  <div class="text">Loading...</div>
+</div>
+
+    );
   }
   return (
+    <>
+  
     <div>
       <div className="Container">
         <div className="intro">
@@ -55,38 +82,31 @@ export const Home = () => {
             ))}
           </div>
         </div>
-      
       </div>
+
       <hr />
       <div className="projects" ref={projectref}>
         <h2>Projects</h2>
         <div className="projects-section">
-        <div className="project-container">
-          {
-          projects.map((value,index)=>(
-            <div className="projects-details">
-              <h3>{value.name}</h3>
-              <p>{value.description}</p>
-              <img src={value.image} alt="project imgae" />
-              <div className="links">
-                <button>Code</button>
-                <button>Live</button>
+          <div className="project-container">
+            {projects.map((value, index) => (
+              <div key={index} className="projects-details">
+                <h3>{value.name}</h3>
+                <p>{value.description}</p>
+                <img src={value.image} alt="project image" />
+                <div className="links">
+                  <button>Code</button>
+                  <button>Live</button>
+                </div>
               </div>
-            </div>
-
-          ))
-          }
-
-        </div>
-       
+            ))}
+          </div>
         </div>
       </div>
+
       <hr />
-      <div>
-       
-        <div><Contact/></div>
-      </div>
-     
+      <Contact />
     </div>
+    </>
   );
 };

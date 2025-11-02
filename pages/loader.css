@@ -1,0 +1,110 @@
+.terminal-loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: 0.1em solid #333;
+  background-color: #1a1a1a;
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(0.8rem, 2.5vw, 1rem); /* responsive font size */
+  padding: 1.5em 1em;
+  width: clamp(10em, 60vw, 14em); /* responsive width */
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  box-sizing: border-box;
+  z-index: 9999;
+}
+
+.terminal-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.5em;
+  background-color: #333;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 0 0.4em;
+  box-sizing: border-box;
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 0.4em;
+}
+
+.control {
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background-color: #777;
+}
+
+.control.close {
+  background-color: #e33;
+}
+
+.control.minimize {
+  background-color: #ee0;
+}
+
+.control.maximize {
+  background-color: #0b0;
+}
+
+.terminal-title {
+  color: #eee;
+  font-size: 0.9em;
+}
+
+.text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.2em solid green; /* Cursor */
+  animation:
+    typeAndDelete 4s steps(11) infinite,
+    blinkCursor 0.5s step-end infinite alternate;
+  margin-top: 1.8em;
+  text-align: center;
+}
+
+/* Cursor blink */
+@keyframes blinkCursor {
+  50% {
+    border-right-color: transparent;
+  }
+}
+
+/* Typing effect */
+@keyframes typeAndDelete {
+  0%, 10% {
+    width: 0;
+  }
+  45%, 55% {
+    width: 6.2em;
+  }
+  90%, 100% {
+    width: 0;
+  }
+}
+
+/* 🌐 Responsive tweaks */
+@media (max-width: 780px) {
+  .terminal-loader {
+    width: 60%;
+    padding: 1em;
+    font-size: 0.9rem;
+  }
+
+  .text {
+    font-size: 0.85rem;
+  }
+}

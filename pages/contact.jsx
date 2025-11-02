@@ -14,14 +14,12 @@ export const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
-
-
+  
   const handleForm = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  
   const handleSendMessage = async () => {
     if (!form.Name || !form.emailid || !form.Message) {
       toast.error("Please fill all fields!");
@@ -30,13 +28,8 @@ export const Contact = () => {
 
     setLoading(true);
     try {
-      const api = "https://vercel-backend-nine-gules.vercel.app/portfolio/contact-Me";
-
-      await axios.post(api, {
-        Name: form.Name,
-        emailid: form.emailid,
-        Message: form.Message,
-      });
+      const api = "http://localhost:5000/contact";
+      await axios.post(api, form);
 
       toast.success("Message sent successfully!");
       setForm({ Name: "", emailid: "", Message: "" });
@@ -49,7 +42,9 @@ export const Contact = () => {
   };
 
   return (
+    
     <>
+    
       <div className="contact-container">
         <div className="contact-info">
           <h3>Get in Touch</h3>
@@ -65,13 +60,13 @@ export const Contact = () => {
           </ul>
 
           <div className="social-links">
-            <div>
+            <div onClick={() => window.open("https://www.linkedin.com/in/tanish-batra-19b261328/", "_blank")}>
               <FaLinkedinIn size={30} />
             </div>
-            <div>
+            <div onClick={() => window.open("https://x.com/TanishBatr97562")}>
               <FaTwitter size={30} />
             </div>
-            <div>
+            <div onClick={() => window.open("https://github.com/tanish-batra123")}>
               <FaGithub size={30} />
             </div>
           </div>
