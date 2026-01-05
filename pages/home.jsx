@@ -10,7 +10,7 @@ import { useEffect } from "react";
 export const Home = () => {
   const [loading,setloading]=useState(true);
   const handleResume = () => {
-    window.open("/resume.pdf", "_blank");
+    window.open("my_resumeword.pdf", "_blank");
   };
 
   const projectref = useRef(null);

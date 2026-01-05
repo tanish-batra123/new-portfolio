@@ -1,3 +1,4 @@
+
 .terminal-loader {
   position: fixed;
   top: 50%;
@@ -7,6 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 
   border: 0.1em solid #333;
   background-color: #1a1a1a;
